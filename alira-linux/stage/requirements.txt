@@ -1,0 +1,79 @@
+# TITAN Project Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core Dependencies
+PyQt5>=5.15.0
+PyQtWebEngine>=5.15.0
+numpy>=1.20.0
+opencv-python>=4.5.0
+Pillow>=8.0.0
+
+# Audio & Sound
+sounddevice>=0.4.0
+pyaudio>=0.2.11
+pyttsx3>=2.71
+
+# Firebase & Authentication
+firebase-admin>=5.0.0
+google-auth>=2.0.0
+google-cloud-firestore>=2.0.0
+cryptography>=3.0.0
+PyJWT>=2.0.0
+jwcrypto>=1.0.0
+
+# Network & Communication
+websockets>=10.0
+requests>=2.25.0
+aiohttp>=3.8.0
+urllib3>=1.26.0
+certifi>=2022.0.0
+
+# Office & Documents
+openpyxl>=3.0.0
+python-docx>=0.8.0
+python-pptx>=0.6.0
+pypdf>=3.0.0
+PyPDF2>=3.0.0
+reportlab>=3.6.0
+PyMuPDF>=1.20.0
+
+# System & Automation
+psutil>=5.8.0
+pywinauto>=0.6.8        # Spotify / app UI control (UI Automation)
+rapidfuzz>=3.0.0        # installed-app fuzzy matching
+pyautogui>=0.9.50
+pygetwindow>=0.0.5
+pyperclip>=1.8.0
+pynput>=1.7.0
+mss>=6.0.0
+
+# Media & Content
+yt-dlp>=2023.1.0
+qrcode>=7.0.0
+pytesseract>=0.3.8
+duckduckgo_search>=3.0.0
+pywhatkit>=5.0.0
+speedtest-cli>=2.0.0
+phonenumbers>=8.0.0
+wikipedia>=1.4.0
+
+# Utilities
+python-dotenv>=0.19.0
+grpcio>=1.50.0
+protobuf>=4.0.0
+google-api-core>=2.0.0
+
+# Windows Specific
+pywin32>=300
+wmi>=1.5.0
+
+# Development & Building
+PyInstaller>=5.0.0
+pyinstaller-hooks-contrib>=2020.0
+jaraco.packaging>=3.0.0
+
+# Optional/Live Dependencies
+livekit>=0.10.0
+
+# Data Processing
+pandas>=1.5.0

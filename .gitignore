@@ -1,0 +1,76 @@
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*service*account*.json
+firebase*.json
+
+# Claude Code local config
+.claude/
+
+# Build artifacts
+build/
+dist/
+dist_native/
+*.egg-info/
+__pycache__/
+*.py[cod]
+*.pyd
+*.obj
+*.exe
+*.msi
+*.apk
+*.zip
+
+# Node
+node_modules/
+
+# Personal / generated data
+**/TABBU_modules/TITAN_memory/
+**/Projects/
+**/.ALIRA-site.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Runtime captures (webcam/screenshots/QR)
+**/TITAN_webcam/
+**/latest_qr.png
+
+# Python virtual environments
+.venv/
+**/.venv/
+venv/
+**/venv/
+
+# Python backups and temporary files
+*.bak
+*.backup*
+*.old
+*.tmp
+*.log
+
+# Local secrets and configuration
+.env
+.env.*
+!.env.example
+secrets/
+**/secrets/
+config.local.*
+credentials.*
+
+# Local application data
+.ALIRA_data/
+.myra_data/
+.TABBU/
+**/TITAN_memory/
+
+# Python caches and test caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

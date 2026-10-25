@@ -1,0 +1,125 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ALIRA-linux"
+version = "0.1.5"
+description = "ALIRA AI Assistant for Linux — same desktop UI, Gemini Live voice, 148+ languages and Linux system control."
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.10"
+# ✅ FIX: `[project.license]` changed shape between setuptools versions —
+# PEP 639's plain string (`license = "MIT"`) only validates on very recent
+# setuptools (~77+); the old table form (`{text = "MIT"}`) only validates on
+# older setuptools. Whichever form is used, SOME real-world pip/setuptools
+# breaks with "project.license must be ..." and the install fails outright.
+# Classifiers-based license declaration has been valid on every setuptools
+# version for years, so it's used here instead. `license-files` itself is a
+# newer [project] key that OLD setuptools rejects outright ("must not
+# contain {'license-files'} properties") — dropped for the same reason.
+# LICENSE is still shipped: MANIFEST.in includes it, and setuptools
+# auto-detects/bundles top-level LICENSE* files into the wheel regardless.
+keywords = ["AI", "assistant", "desktop", "pyqt", "automation", "voice", "gemini"]
+authors = [{ name = "Md Ali", email = "support@SecureWithAli.in" }]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: End Users/Desktop",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Utilities",
+  "Programming Language :: Python :: 3.10",
+  "Environment :: X11 Applications :: Qt",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Operating System :: POSIX :: Linux",
+]
+
+# ── CLIENT deps — NO firebase-admin, NO google-cloud-firestore ───────────────
+# Firebase Admin SDK sirf backend server pe install hoga
+dependencies = [
+  "PyQt5>=5.15.0",
+  "PyQtWebEngine>=5.15.0",
+  "numpy>=1.20.0",
+  "Pillow>=8.0.0",
+  "sounddevice>=0.4.0",
+  "pyrebase4>=4.6.0",
+  "python-jwt>=4.0.0",
+  "jwcrypto>=1.5.0",
+  "cryptography>=3.0.0",
+  "requests>=2.25.0",
+  "aiohttp>=3.8.0",
+  "websockets>=10.0",
+  "urllib3>=1.26.0",
+  "certifi>=2022.0.0",
+  "openpyxl>=3.0.0",
+  "python-docx>=0.8.0",
+  "python-pptx>=0.6.0",
+  "pypdf>=3.0.0",
+  "psutil>=5.8.0",
+  "rapidfuzz>=3.0.0",
+  "pyautogui>=0.9.50",
+  "pyperclip>=1.8.0",
+  "mss>=6.0.0",
+  "yt-dlp>=2023.1.0",
+  "qrcode>=7.0.0",
+  "duckduckgo_search>=3.0.0",
+  "speedtest-cli>=2.0.0",
+  "phonenumbers>=8.0.0",
+  "wikipedia>=1.4.0",
+  "python-dotenv>=0.19.0",
+  "colorama>=0.4.0",
+  "google-generativeai>=0.3.0",
+  "opencv-python-headless>=4.5.0",
+  "python-xlib>=0.33",
+  "pytesseract>=0.3.8",
+]
+
+[project.urls]
+"Homepage"    = "https://github.com/SecureWithAli/ALIRA-ai-assistant"
+"Backend API" = "https://api.SecureWithAli.in"
+"Support"     = "https://t.me/SecureWithAli1"
+
+[project.scripts]
+ALIRA-linux = "ALIRA_linux_boot:main"
+ALIRA-linux-gui = "ALIRA_linux_boot:main"
+
+# ── Package config ────────────────────────────────────────────────────────────
+[tool.setuptools]
+include-package-data = true
+# ✅ FIX: TABBU.py, Main_normal.py, ALIRA_coder_integration.py, etc. sit as loose
+# top-level scripts (no __init__.py) — `ALIRA.cli:main` does `from Main_normal
+# import main`, but setuptools was never told to actually INSTALL these files
+# as importable modules. MANIFEST.in's `include TABBU.py` only puts them in the
+# sdist tarball, NOT into site-packages — so after `pip install`, `ALIRA` command
+# crashed with ModuleNotFoundError: No module named 'Main_normal' (same class
+# of "ALIRA can't access X" failure as the local dev-run issue). py-modules
+# below makes setuptools actually install them next to the ALIRA/ package.
+py-modules = [
+  "ALIRA_linux_boot", "ALIRA_linux_tools", "linux_extra",
+  "TABBU", "TABBU_ui", "ALIRA_ui", "ALIRA_pages", "ALIRA_actions", "ALIRA_quick_features", "ALIRA_edge_glow", "ALIRA_float_orb", "ALIRA_guardian", "ALIRA_autostart", "ALIRA_prefs", "ALIRA_slot", "ALIRA_lang", "ALIRA_splash", "ALIRA_apps", "ALIRA_spotify", "ALIRA_studio", "TABBU_office_manage",
+  "camera_vision_module", "Main_normal",
+  "ALIRA_coder_integration", "normal_prompt", "prompt",
+  "screen_share_module", "whatsapp_file_sender",
+]
+
+[tool.setuptools.packages.find]
+where   = ["."]
+include = [
+  "ALIRA", "ALIRA.*",
+  "TABBU_modules", "TABBU_modules.*",
+  "website_builder", "website_builder.*",
+]
+# admin_and_build_tools NEVER in PyPI (developer tools only)
+# ALIRA_coder.node_modules / .src: dev-only, never shipped (only compiled dist/ is)
+exclude = [
+  "admin_and_build_tools*","dist*","build*","*.egg-info*","backend*",
+  "ALIRA_coder.node_modules*", "ALIRA_coder.src*",
+]
+
+[tool.setuptools.package-data]
+"ALIRA"          = ["*.py"]
+"TABBU_modules"  = ["*.py", "*.xml", "haarcascade_frontalface_default.xml", "assets/*.png", "assets/*.jpg", "assets/about/*.png", "assets/fonts/*"]
+"website_builder" = ["*.py","*.json","*.html","*.css","*.js","*.txt"]
+# ✅ FIX: ALIRA_coder's COMPILED engine (dist/) ships so ALIRA Coder actually
+# works after `pip install` — previously nothing under ALIRA_coder/ was
+# installed at all, so ALIRACoderEngine.is_available() was always False.
+# IMPORTANT: *.json excluded from TABBU_modules on purpose (no Firebase JSON shipped)

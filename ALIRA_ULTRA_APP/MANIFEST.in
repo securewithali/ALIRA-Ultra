@@ -1,0 +1,81 @@
+# ALIRA - MANIFEST.in  v5  [SECURE]
+# PyPI build mein Firebase JSON KABHI include nahi hoga
+#
+# NOTE: keep this file plain ASCII. distutils' sdist template reader opens
+# MANIFEST.in with the platform default text encoding (often cp1252 on
+# Windows, not UTF-8) - any em-dash/box-drawing character here breaks
+# `pip install` for every user whose system default isn't UTF-8.
+
+include README.md
+include LICENSE
+include pyproject.toml
+include requirements.txt
+
+# Root Python modules
+include TABBU.py
+include TABBU_ui.py
+include ALIRA_ui.py
+include ALIRA_pages.py
+include ALIRA_actions.py
+include ALIRA_quick_features.py
+include ALIRA_edge_glow.py
+include ALIRA_float_orb.py
+include ALIRA_guardian.py
+include ALIRA_autostart.py
+include ALIRA_prefs.py
+include ALIRA_slot.py
+include ALIRA_lang.py
+include ALIRA_splash.py
+include ALIRA_apps.py
+include ALIRA_spotify.py
+include ALIRA_studio.py
+recursive-include TABBU_modules/assets *.png
+recursive-include TABBU_modules/assets *.jpg
+recursive-include TABBU_modules/assets *.ttf
+include TABBU_daemon.py
+include TABBU_startup.py
+include TABBU_office_manage.py
+include camera_vision_module.py
+include main_hotkey.py
+include Main_normal.py
+include normal_prompt.py
+include prompt.py
+include screen_share_module.py
+include whatsapp_file_sender.py
+
+# Root Python modules - ALIRA Coder bridge
+include ALIRA_coder_integration.py
+
+# Packages
+recursive-include ALIRA *.py
+recursive-include TABBU_modules *.py
+include TABBU_modules/haarcascade_frontalface_default.xml
+recursive-include website_builder *.py *.json *.html *.css *.js
+
+# ALIRA Coder - compiled engine only (never src/ or node_modules/)
+include ALIRA_coder/__init__.py
+include ALIRA_coder/package.json
+include ALIRA_coder/package-lock.json
+include ALIRA_coder/README.md
+recursive-include ALIRA_coder/dist *
+
+# == SECURITY EXCLUSIONS ========================================
+# Firebase Admin SDK JSON - KABHI PyPI mein nahi jaayega
+global-exclude *adminsdk*.json
+global-exclude *firebase*adminsdk*.json
+global-exclude *service-account*.json
+global-exclude speen-to-earn*.json
+
+# admin_and_build_tools - developer only, not for end users
+prune admin_and_build_tools
+
+# Standard
+global-exclude *.pyc
+global-exclude __pycache__
+global-exclude .env
+global-exclude .gitignore
+prune dist
+prune build
+prune *.egg-info
+prune dist_output
+prune backend
