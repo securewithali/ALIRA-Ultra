@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ::: {align="center"}
 `<img src="ALIRA_ULTRA_APP/tabbu_modules/assets/alira_logo.png" alt="ALIRA logo" width="120" />`{=html}
 
@@ -264,3 +265,7 @@ preserve each component's required notices and license terms.
 Made with care by the ALIRA project maintainer, with attribution to the
 original MYRA ULTRA project and its contributors.
 :::
+=======
+# ALIRA-Ultra
+ALIRA AI — A customized desktop assistant based on MYRA ULTRA.
+>>>>>>> origin/main
